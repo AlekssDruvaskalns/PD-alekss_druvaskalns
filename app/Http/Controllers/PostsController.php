@@ -19,6 +19,7 @@ class PostsController extends Controller
      */
     public function index()
     {
+        $posts=Post::all();
         return view('blog.index')
             ->with('posts', Post::orderBy('updated_at', 'DESC')->get());
     }
@@ -30,7 +31,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('blog.create');
+        return view('blog.create'); //pievienots view create
     }
 
     /**
@@ -69,7 +70,7 @@ class PostsController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($slug, Post $posts)
     {
         $post = null;
         if (is_numeric($slug) && (int)$slug == $slug) {
@@ -88,7 +89,7 @@ class PostsController extends Controller
      */
     public function edit($slug)
     {
-
+        return view('blog.edit');
     }
 
     /**
@@ -128,7 +129,7 @@ class PostsController extends Controller
         $post = Post::where('slug', $slug);
         $post->delete();
 
-        return redirect('/blog')
+        return redirect('/blog.index') 
             ->with('message', 'Your post has been deleted!');
     }
 }

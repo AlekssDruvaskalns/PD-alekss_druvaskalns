@@ -20,7 +20,7 @@
 @if (Auth::check())
     <div class="pt-15 w-4/5 m-auto">
         <a 
-            href="/blog/create"
+            href="{{route(/blog/create)}}"
             class="bg-blue-500 uppercase bg-transparent text-gray-900 text-base font-extrabold py-3 px-5 rounded-3xl">
             Create post
         </a>
@@ -57,8 +57,12 @@
                         Edit
                     </a>
                 </span>
+                
 
                 <span class="float-right">
+                    @csrf
+                    @method('DELETE')
+                    <form action="{{route(blog.destroy, $post->id)}}" method="POST"></form>
                         <button
                             class="text-red-500 pr-3"
                             type="submit">

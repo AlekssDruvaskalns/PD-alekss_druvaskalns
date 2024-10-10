@@ -1,6 +1,7 @@
 @extends('layouts.app', ['title' => "Create a blog post"])
 
 @section('content')
+<form action="{{route(blog.store)}}" method="POST"></form>
 <div class="w-4/5 m-auto text-left">
     <div class="py-15">
         <h1 class="text-6xl">
@@ -22,9 +23,12 @@
 @endif
 
 <div class="w-4/5 m-auto pt-20">
-    <form 
+    <form
+        method="post"
         action="/blog"
         enctype="multipart/form-data">
+
+        @csrf
 
         <input 
             type="text"
